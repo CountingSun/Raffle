@@ -1,0 +1,82 @@
+<view class="main_baseView">
+<view class='head_view'>
+{{titleString}}
+</view>
+	<view class="main">
+		<view class="canvas-container">
+			<view  animation="{{animationData}}" class="canvas-content" >
+      <!-- <view class='view1'></view>
+      <view class='view2'></view>
+      <view class='view3'></view>
+      <view class='view4'></view> -->
+				<view class="canvas-line">
+					<view class="canvas-litem" wx:for="{{awardsList}}" wx:key="unique" style="-webkit-transform: rotate({{item.lineTurn}});transform: rotate({{item.lineTurn}})">
+          </view>
+				</view>
+        
+				<view class="canvas-list">
+					<view class="canvas-item" wx:for="{{awardsList}}" wx:key="unique">
+				  		<view class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})"> {{item.award}} </view>
+					</view>
+				</view>
+			</view>
+      
+			<view bindtap="getLotteryResult" class="canvas-btn {{btnDisabled}}">抽奖</view>	
+      <!-- <button class='getUserInfoButton' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">  </button> -->
+	
+		</view>
+	</view>
+    <view class="main-container">
+    <view class="main-container-rule">
+      <text class="main-rule-title">奖项说明：</text>
+      <block wx:for="{{arrRulers}}" wx:key="unique">
+        <text class="main-rule-item">{{item.ruleName}}：{{item.ruleDec}}</text>
+      </block>
+      <text class="main-rule-title">领奖地址：</text>
+        <text class="main-rule-item">{{awardAddress}}</text>
+
+    </view>	
+  </view>
+
+</view>
+
+<!-- 输入基本信息弹出视图 -->
+<view class='modalBaseView' hidden="{{modalHidden}}">
+<view class='contentBaseView'>
+  <view class='title'>完善信息，开始抽奖！</view>
+  <view class='halving_line'></view>
+  <view class='input_base_view'>
+  <input class='style_input' type='text' placeholder='姓名' bindinput='nameInput'></input>
+  <input class='style_input' type='number' placeholder='手机号' bindinput='telInput'></input>
+  </view>
+  <view class='button_base'>
+    <image class='select_image' src='/images/{{selectImageState}}.png' bindtap='selectImageClick' mode='aspectFit'></image>
+    <view class='need_know' bindtap=''>抽奖须知</view>
+  </view>
+
+  <view class='buttonBaseView'>
+    <view class='sureButton' bindtap='getOpenID' >前去抽奖</view>
+  </view>
+  </view>
+</view>
+<!-- 抽奖完成弹出视图 -->
+<view class='modalBaseView' hidden="{{finishHidden}}">
+  <view class='contentBaseView'>
+
+    <view class='finish_view'>{{alearnTitle}}</view>
+    <view class='finish_view'>{{resultString}}</view>
+    <view class='buttonBaseView'>
+     <view class='sureButton' bindtap='acceptPrize'>{{sureButtonTitle}}</view>
+    </view>
+  </view>
+</view>
+<!-- 抽奖结果弹出视图 -->
+<view class='modalBaseView' hidden="{{resultHidden}}">
+ <view class='contentBaseView'>
+
+    <view class='finish_view'>{{alearnTitle}}</view>
+    <view class='finish_view'>{{resultString}}</view>
+    <view class='finish_view'>您已领过奖，感谢您的参与！</view>
+ </view>
+
+</view>
